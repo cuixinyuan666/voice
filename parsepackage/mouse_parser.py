@@ -21,9 +21,8 @@ import math
 
 
 class MouseParser:
-    def __init__(self, system, steps):
+    def __init__(self, steps):
         self.mouseStarted = False
-        self.os = system
         self.steps = steps
         self.stopMouse = True
 

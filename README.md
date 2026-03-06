@@ -5,7 +5,7 @@ Sidekick is still very much a work in progress, but the sky is the limit. One of
 
 ## Why use Sidekick?
 
-Sidekick was created with the goal of being general purpose, lightweight, extensible, and easy to use. It works offline and cross-platform. While some other tools (listed below) specialize in voice coding and entirely replacing the keyboard and mouse in specific application contexts, Sidekick is intended to help rather than replace and to work across all applications.
+Sidekick was created with the goal of being general purpose, lightweight, extensible, and easy to use. It works offline and on Windows. While some other tools (listed below) specialize in voice coding and entirely replacing the keyboard and mouse in specific application contexts, Sidekick is intended to help rather than replace and to work across all applications.
 
 I use sidekick every day - especially when surfing the web, reading, and writing smaller compositions. Just reducing use of the mouse wheel/buttons alone helped me significantly. Let me know if Sidekick is helpful for you. 
 
@@ -16,18 +16,6 @@ If you would like to contribute, create an issue and let me know. I would be int
 ## Install
 
 Download the vosk-model-en-us-daanzu-20200905-lgraph (129M) model folder from https://alphacephei.com/vosk/models, place in same directory as sidekick.py, and rename the folder to 'model'. 
-
-#### On Mac
-
-- brew install portaudio
-- pip install numpy vosk pyautogui pyaudio
-
-#### On Ubuntu
-
-- sudo apt-get install scrot python3-tk python3-dev (for pyautogui on Ubuntu)
-- sudo apt-get install portaudio19-dev python-all-dev python3-all-dev
-- sudo apt-get install python3-pyaudio
-- pip install numpy vosk pyautogui pyaudio
 
 #### On Windows
 

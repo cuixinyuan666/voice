@@ -16,7 +16,6 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 from actions import *
-import platform
 from .mouse_parser import MouseParser
 from .text_parser import TextParser
 from .command_parser import CommandParser
@@ -25,7 +24,6 @@ from .alpha_parser import AlphaParser
 
 class Parser:
     def __init__(self):
-        self.os = platform.system()
         self.state = "命令"
         self.command_buffer = []
         self.pause = False
@@ -44,10 +42,10 @@ class Parser:
         self.states = ["文本", "命令", "鼠标", "暂停", "字母"]
         self.steps = ["一", "二", "三", "四", "五", "六", "七", "八"]
 
-        self.mouseParser = MouseParser(self.os, self.stepmapping)
-        self.textParser = TextParser(self.os, self.stepmapping)
-        self.commandParser = CommandParser(self.os, self.stepmapping)
-        self.alphaParser = AlphaParser(self.os)
+        self.mouseParser = MouseParser(self.stepmapping)
+        self.textParser = TextParser(self.stepmapping)
+        self.commandParser = CommandParser(self.stepmapping)
+        self.alphaParser = AlphaParser()
 
         # nontextcommands can be fed to a speech to text model to make it work more effectively for commands
         self.nontextcommands = list(

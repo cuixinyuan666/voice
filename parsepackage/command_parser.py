@@ -20,17 +20,15 @@ import string
 
 
 class CommandParser:
-    def __init__(self, system, steps):
-        self.os = system
+    def __init__(self, steps):
         self.steps = steps 
         self.tempvar = ""
 
         self.keys = ['a', 'b', 'c', 'd', 'e','f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
-'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z','alt','delete','control','shift','tab','apple']
+'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z','alt','delete','control','shift','tab']
 
         self.keymapping = {
-            "control" : "ctrl",
-            "apple" : "command"
+            "control" : "ctrl"
         }
 
         self.grid_horizontal = ['a','b','c','d','e','f','g','h','i','j','k']
@@ -224,18 +222,10 @@ class CommandParser:
             rightclick()
             command_buffer = []
         elif command_buffer[0] == "左移":
-            if self.os == "Darwin":
-                hotKeyPress(["command", "left"])
-            else:
-                hotKeyPress(["alt", "left"])
-
+            hotKeyPress(["alt", "left"])
             command_buffer = []
         elif command_buffer[0] == "右移":
-            if self.os == "Darwin":
-                hotKeyPress(["command", "right"])
-            else:
-                hotKeyPress(["alt", "right"])
-                
+            hotKeyPress(["alt", "right"])
             command_buffer = []
         elif command_buffer[0] == "下一页":
             hotKeyPress(["pgdn"])
@@ -298,70 +288,37 @@ class CommandParser:
                         command_buffer[1], command_buffer
                     )
         elif command_buffer[0] == "复制":
-            if self.os == "Darwin":
-                hotKeyPress(["command", "c"])
-            else:
-                hotKeyPress(["ctrl", "c"])
+            hotKeyPress(["ctrl", "c"])
             command_buffer = []
         elif command_buffer[0] == "放大":
-            if self.os == "Darwin":
-                hotKeyPress(["command", "+"])
-            else:
-                hotKeyPress(["ctrl", "+"])
+            hotKeyPress(["ctrl", "+"])
             command_buffer = []
         elif command_buffer[0] == "缩小":
-            if self.os == "Darwin":
-                hotKeyPress(["command", "-"])
-            else:
-                hotKeyPress(["ctrl", "-"])
+            hotKeyPress(["ctrl", "-"])
             command_buffer = []
         elif command_buffer[0] == "粘贴":
-            if self.os == "Darwin":
-                hotKeyPress(["command", "v"])
-            else:
-                hotKeyPress(["ctrl", "v"])
+            hotKeyPress(["ctrl", "v"])
             command_buffer = []
         elif command_buffer[0] == "关闭":
-            if self.os == "Darwin":
-                hotKeyPress(["command", "w"])
-            else:
-                hotKeyPress(["ctrl", "w"])
+            hotKeyPress(["ctrl", "w"])
             command_buffer = []
         elif command_buffer[0] == "查找":
-            if self.os == "Darwin":
-                hotKeyPress(["command", "f"])
-            else:
-                hotKeyPress(["ctrl", "f"])
+            hotKeyPress(["ctrl", "f"])
             command_buffer = []
         elif command_buffer[0] == "撤销":
-            if self.os == "Darwin":
-                hotKeyPress(["command", "z"])
-            else:
-                hotKeyPress(["ctrl", "z"])
+            hotKeyPress(["ctrl", "z"])
             command_buffer = []
         elif command_buffer[0] == "重做":
-            if self.os == "Darwin":
-                hotKeyPress(["command", "shift","z"])
-            else:
-                hotKeyPress(["ctrl", "shift","z"])
+            hotKeyPress(["ctrl", "shift","z"])
             command_buffer = []
         elif command_buffer[0] == "替换":
-            if self.os == "Darwin":
-                hotKeyPress(["command", "shift", "h"])
-            else:
-                hotKeyPress(["ctrl", "h"])
+            hotKeyPress(["ctrl", "h"])
             command_buffer = []
         elif command_buffer[0] == "新建":
-            if self.os == "Darwin":
-                hotKeyPress(["command", "t"])
-            else:
-                hotKeyPress(["ctrl", "t"])
+            hotKeyPress(["ctrl", "t"])
             command_buffer = []
         elif command_buffer[0] == "恢复":
-            if self.os == "Darwin":
-                hotKeyPress(["command", "shift", "t"])
-            else:
-                hotKeyPress(["ctrl","shift","t"])
+            hotKeyPress(["ctrl","shift","t"])
             command_buffer = []
         elif command_buffer[0] == "上一个":
             hotKeyPress(["ctrl", "shift","tab"])
@@ -376,17 +333,10 @@ class CommandParser:
             hotKeyPress(["ctrl", "c"])
             command_buffer = []
         elif command_buffer[0] == "保存":
-            if self.os == "Darwin":
-                hotKeyPress(["command", "s"])
-            else:
-                hotKeyPress(["ctrl", "s"])
+            hotKeyPress(["ctrl", "s"])
             command_buffer = []
         elif command_buffer[0] == "切换":
-
-            if self.os == "Darwin":
-                holdKeyDown("command")
-            else:
-                holdKeyDown("alt")
+            holdKeyDown("alt")
 
             if len(command_buffer) == 1:
                 hotKeyPress(["tab"])
@@ -397,20 +347,10 @@ class CommandParser:
                     command_buffer = ["切换"]
                 elif command_buffer[1] == "退出":
                     hotKeyPress(["escape"])
-                    
-                    if self.os == "Darwin":
-                        keyUp("command")
-                    else:
-                        keyUp("alt")
-
+                    keyUp("alt")
                     command_buffer = []                    
-
                 else:
-                    if self.os == "Darwin":
-                        keyUp("command")
-                    else:
-                        keyUp("alt")
-
+                    keyUp("alt")
                     command_buffer = []
 
         elif command_buffer[0] == "按住":

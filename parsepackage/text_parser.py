@@ -19,8 +19,7 @@ from actions import *
 
 
 class TextParser:
-    def __init__(self, system, steps):
-        self.os = system
+    def __init__(self, steps):
         self.steps = steps
         self.space = " "
         self.tocap = ["i"]

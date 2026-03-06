@@ -20,8 +20,7 @@ import string
 
 
 class AlphaParser:
-    def __init__(self, system):
-        self.os = system
+    def __init__(self):
         self.numbers = [
             "零",
             "一",

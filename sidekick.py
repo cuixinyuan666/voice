@@ -23,8 +23,8 @@ import string
 import math
 from parsepackage import *
 
-if not os.path.exists("model"):
-    print ("Please download the model from https://alphacephei.com/vosk/models and unpack as 'model' in the current folder.")
+if not os.path.exists("model_cn"):
+    print ("请下载中文模型 from https://alphacephei.com/vosk/models 并解压为 'model_cn' 在当前文件夹中.")
     exit (1)
 
 import pyaudio
@@ -81,7 +81,7 @@ def ingest(currentstate,crec,trec,arec):
 commandwords = listToList(parser.nontextcommands)
 alphavals = listToList(parser.alphavalues)
 
-model = Model("model")
+model = Model("model_cn")
 # the text recommender uses the standard model for transcription
 textrec = KaldiRecognizer(model, 16000)
 # use wordlist in our command recommender
@@ -92,7 +92,7 @@ p = pyaudio.PyAudio()
 stream = p.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True, frames_per_buffer=8000)
 stream.start_stream()
 
-print("\nSidekick at your service. Please wait silently for the threshold to be set based on ambient noise before use.")
+print("\nSidekick 为您服务。请保持安静，等待基于环境噪音设置阈值。")
 
 threshold_buffer = 1 # how many dB above ambient noise threshold will be set
 thresholdset = False # whether or not threshold has been set
@@ -113,9 +113,9 @@ while True:
         threshcount += 1
         if threshcount >= 10:
             thresholdset = True
-            print("Your sidekick now awaits your command.")
+            print("您的 Sidekick 现在等待您的指令。")
             threshold = sum(ambientvals) / len(ambientvals) + threshold_buffer
-            print("Threshold is now set at " + str(round(threshold,2)) + " dB.")
+            print("阈值现在设置为 " + str(round(threshold,2)) + " dB。")
     
     # send audio data to model for processing when threshold breached and shortly afterward
     elif dB > threshold or wait == True:

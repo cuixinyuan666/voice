@@ -77,54 +77,54 @@ class CommandParser:
             "hundred",
         ]
         self.stateless_commands = [
-            "click",
-            "go",
-            "tab",
-            "double",
-            "enter",
-            "space",
-            "back",
+            "点击",
+            "开始",
+            "制表",
+            "双击",
+            "回车",
+            "空格",
+            "删除",
         ]
         self.commands = [
-            "undo",
-            "hot",
-            "ack",
-            "lap",
-            "nip",
-            "switch",
-            "cancel",
-            "key",
-            "next",
-            "redo",
-            "close",
-            "find",
-            "replace",
-            "nab",
-            "cab",
-            "lab",
-            "rab",
-            "escape",
-            "in",
-            "out",
-            "rick",
-            "hold",
-            "lock",
-            "terminate",
-            "release",
-            "triple",
-            "grid",
-            "up",
-            "down",
-            "left",
-            "right",
-            "copy",
-            "paste",
-            "north",
-            "south",
-            "east",
-            "west",
-            "save",
-            "scroll",
+            "撤销",
+            "热键",
+            "确认",
+            "左移",
+            "右移",
+            "切换",
+            "取消",
+            "按键",
+            "下一个",
+            "重做",
+            "关闭",
+            "查找",
+            "替换",
+            "新建",
+            "恢复",
+            "上一个",
+            "下一个",
+            "退出",
+            "放大",
+            "缩小",
+            "右键",
+            "按住",
+            "锁定",
+            "终止",
+            "释放",
+            "三击",
+            "网格",
+            "上",
+            "下",
+            "左",
+            "右",
+            "复制",
+            "粘贴",
+            "北",
+            "南",
+            "东",
+            "西",
+            "保存",
+            "滚动",
         ]
 
         self.commandlist = (
@@ -173,27 +173,27 @@ class CommandParser:
 
     # Stateless commands should return an empty buffer
     def stateless_command(self, command_buffer):
-        if command_buffer[0] == "click" or command_buffer[0] == "go":
+        if command_buffer[0] == "点击" or command_buffer[0] == "开始":
             click()
             command_buffer = []
-        elif command_buffer[0] == "double":
+        elif command_buffer[0] == "双击":
             doubleclick()
             command_buffer = []
-        elif command_buffer[0] == "inter" or command_buffer[0] == "enter":
+        elif command_buffer[0] == "回车":
             hitEnter()
             command_buffer = []
-        elif command_buffer[0] == "tab":
+        elif command_buffer[0] == "制表":
             hitTab()
             command_buffer = []
-        elif command_buffer[0] == "space":
+        elif command_buffer[0] == "空格":
             hitSpace()
             command_buffer = []
-        elif command_buffer[0] == "ack":
+        elif command_buffer[0] == "确认":
             holdKeyDown("alt")
             click()
             keyUp("alt")
             command_buffer = []
-        elif command_buffer[0] == "back":
+        elif command_buffer[0] == "删除":
             if len(command_buffer) >= 2:
                 if command_buffer[1] in self.numbers:
                     backspace(int(self.word_to_int(command_buffer[1])))
@@ -220,44 +220,44 @@ class CommandParser:
         return command_buffer
 
     def evaluate_command(self, command_buffer):
-        if command_buffer[0] == "rick":
+        if command_buffer[0] == "右键":
             rightclick()
             command_buffer = []
-        elif command_buffer[0] == "lap":
+        elif command_buffer[0] == "左移":
             if self.os == "Darwin":
                 hotKeyPress(["command", "left"])
             else:
                 hotKeyPress(["alt", "left"])
 
             command_buffer = []
-        elif command_buffer[0] == "nip":
+        elif command_buffer[0] == "右移":
             if self.os == "Darwin":
                 hotKeyPress(["command", "right"])
             else:
                 hotKeyPress(["alt", "right"])
                 
             command_buffer = []
-        elif command_buffer[0] == "pod":
+        elif command_buffer[0] == "下一页":
             hotKeyPress(["pgdn"])
             command_buffer = []
-        elif command_buffer[0] == "pup":
+        elif command_buffer[0] == "上一页":
             hotKeyPress(["pgup"])
             command_buffer = []
-        elif command_buffer[0] == "triple":
+        elif command_buffer[0] == "三击":
             tripleclick()
             command_buffer = []
-        elif command_buffer[0] == "lock":
+        elif command_buffer[0] == "锁定":
             if len(command_buffer) == 1:
                 self.x, self.y = getPosition()
             elif len(command_buffer) >= 2:
-                if command_buffer[1] == "release":
+                if command_buffer[1] == "释放":
                     dragMouse(self.x, self.y)
                     command_buffer = []
                 else:
                     return self.handle_invalid_command(
                         command_buffer[1], command_buffer
                     )
-        elif command_buffer[0] == "up":
+        elif command_buffer[0] == "上":
             if len(command_buffer) >= 2:
                 if command_buffer[1] in self.numbers:
                     for i in range(int(self.word_to_int(command_buffer[1]))):
@@ -267,7 +267,7 @@ class CommandParser:
                     return self.handle_invalid_command(
                         command_buffer[1], command_buffer
                     )
-        elif command_buffer[0] == "down":
+        elif command_buffer[0] == "下":
             if len(command_buffer) >= 2:
                 if command_buffer[1] in self.numbers:
                     for i in range(int(self.word_to_int(command_buffer[1]))):
@@ -277,7 +277,7 @@ class CommandParser:
                     return self.handle_invalid_command(
                         command_buffer[1], command_buffer
                     )
-        elif command_buffer[0] == "left":
+        elif command_buffer[0] == "左":
             if len(command_buffer) >= 2:
                 if command_buffer[1] in self.numbers:
                     for i in range(int(self.word_to_int(command_buffer[1]))):
@@ -287,7 +287,7 @@ class CommandParser:
                     return self.handle_invalid_command(
                         command_buffer[1], command_buffer
                     )
-        elif command_buffer[0] == "right":
+        elif command_buffer[0] == "右":
             if len(command_buffer) >= 2:
                 if command_buffer[1] in self.numbers:
                     for i in range(int(self.word_to_int(command_buffer[1]))):
@@ -297,91 +297,91 @@ class CommandParser:
                     return self.handle_invalid_command(
                         command_buffer[1], command_buffer
                     )
-        elif command_buffer[0] == "copy":
+        elif command_buffer[0] == "复制":
             if self.os == "Darwin":
                 hotKeyPress(["command", "c"])
             else:
                 hotKeyPress(["ctrl", "c"])
             command_buffer = []
-        elif command_buffer[0] == "in":
+        elif command_buffer[0] == "放大":
             if self.os == "Darwin":
                 hotKeyPress(["command", "+"])
             else:
                 hotKeyPress(["ctrl", "+"])
             command_buffer = []
-        elif command_buffer[0] == "out":
+        elif command_buffer[0] == "缩小":
             if self.os == "Darwin":
                 hotKeyPress(["command", "-"])
             else:
                 hotKeyPress(["ctrl", "-"])
             command_buffer = []
-        elif command_buffer[0] == "paste":
+        elif command_buffer[0] == "粘贴":
             if self.os == "Darwin":
                 hotKeyPress(["command", "v"])
             else:
                 hotKeyPress(["ctrl", "v"])
             command_buffer = []
-        elif command_buffer[0] == "close":
+        elif command_buffer[0] == "关闭":
             if self.os == "Darwin":
                 hotKeyPress(["command", "w"])
             else:
                 hotKeyPress(["ctrl", "w"])
             command_buffer = []
-        elif command_buffer[0] == "find":
+        elif command_buffer[0] == "查找":
             if self.os == "Darwin":
                 hotKeyPress(["command", "f"])
             else:
                 hotKeyPress(["ctrl", "f"])
             command_buffer = []
-        elif command_buffer[0] == "undo":
+        elif command_buffer[0] == "撤销":
             if self.os == "Darwin":
                 hotKeyPress(["command", "z"])
             else:
                 hotKeyPress(["ctrl", "z"])
             command_buffer = []
-        elif command_buffer[0] == "redo":
+        elif command_buffer[0] == "重做":
             if self.os == "Darwin":
                 hotKeyPress(["command", "shift","z"])
             else:
                 hotKeyPress(["ctrl", "shift","z"])
             command_buffer = []
-        elif command_buffer[0] == "replace":
+        elif command_buffer[0] == "替换":
             if self.os == "Darwin":
                 hotKeyPress(["command", "shift", "h"])
             else:
                 hotKeyPress(["ctrl", "h"])
             command_buffer = []
-        elif command_buffer[0] == "nab":
+        elif command_buffer[0] == "新建":
             if self.os == "Darwin":
                 hotKeyPress(["command", "t"])
             else:
                 hotKeyPress(["ctrl", "t"])
             command_buffer = []
-        elif command_buffer[0] == "cab":
+        elif command_buffer[0] == "恢复":
             if self.os == "Darwin":
                 hotKeyPress(["command", "shift", "t"])
             else:
                 hotKeyPress(["ctrl","shift","t"])
             command_buffer = []
-        elif command_buffer[0] == "lab":
+        elif command_buffer[0] == "上一个":
             hotKeyPress(["ctrl", "shift","tab"])
             command_buffer = []
-        elif command_buffer[0] == "rab":
+        elif command_buffer[0] == "下一个":
             hotKeyPress(["ctrl", "tab"])
             command_buffer = []
-        elif command_buffer[0] == "escape":
+        elif command_buffer[0] == "退出":
             hotKeyPress(["escape"])
             command_buffer = []
-        elif command_buffer[0] == "terminate":
+        elif command_buffer[0] == "终止":
             hotKeyPress(["ctrl", "c"])
             command_buffer = []
-        elif command_buffer[0] == "save" or command_buffer[0] == "say":
+        elif command_buffer[0] == "保存":
             if self.os == "Darwin":
                 hotKeyPress(["command", "s"])
             else:
                 hotKeyPress(["ctrl", "s"])
             command_buffer = []
-        elif command_buffer[0] == "switch":
+        elif command_buffer[0] == "切换":
 
             if self.os == "Darwin":
                 holdKeyDown("command")
@@ -392,10 +392,10 @@ class CommandParser:
                 hotKeyPress(["tab"])
 
             if len(command_buffer) >= 2:
-                if command_buffer[1] == "next":
+                if command_buffer[1] == "下一个":
                     hotKeyPress(["tab"])
-                    command_buffer = ["switch"]
-                elif command_buffer[1] == "escape":
+                    command_buffer = ["切换"]
+                elif command_buffer[1] == "退出":
                     hotKeyPress(["escape"])
                     
                     if self.os == "Darwin":
@@ -413,16 +413,16 @@ class CommandParser:
 
                     command_buffer = []
 
-        elif command_buffer[0] == "hold":
+        elif command_buffer[0] == "按住":
 
             if len(command_buffer) == 1:
                 holdLeft()
-                command_buffer = ["hold"]
+                command_buffer = ["按住"]
             else:
                 releaseLeft()
                 command_buffer = []
 
-        elif command_buffer[0] == "key":
+        elif command_buffer[0] == "按键":
 
             if len(command_buffer) >= 2:
 
@@ -431,7 +431,7 @@ class CommandParser:
                         keyUp(self.tempvar)
                     holdKeyDown(self.map_keys(command_buffer[1]))
                     self.tempvar = self.map_keys(command_buffer[1])
-                    command_buffer = ["key"]
+                    command_buffer = ["按键"]
 
                 else:
                     keyUp(self.tempvar)
@@ -439,7 +439,7 @@ class CommandParser:
 
                     command_buffer = []            
 
-        elif command_buffer[0] == "hot":
+        elif command_buffer[0] == "热键":
 
             if command_buffer[-1] in self.keys or len(command_buffer) == 1:
                 pass
@@ -447,66 +447,66 @@ class CommandParser:
             else:
                 hot_keys = []
                 for val in command_buffer:
-                    if val != "hot":
+                    if val != "热键":
                         hot_keys.append(self.map_keys(val))
                 
                 hotKeyPress(hot_keys)
 
                 command_buffer = [] 
 
-        elif command_buffer[0] == "north":
+        elif command_buffer[0] == "北":
             if len(command_buffer) >= 2:
                 if command_buffer[1] in self.steps:
                     moveMouse(0, -1 * int(self.steps[command_buffer[1]]))
-                    command_buffer = ["north"]
+                    command_buffer = ["北"]
                 else:
                     return self.handle_invalid_command(
                         command_buffer[1], command_buffer
                     )
-        elif command_buffer[0] == "south":
+        elif command_buffer[0] == "南":
             if len(command_buffer) >= 2:
                 if command_buffer[1] in self.steps:
                     moveMouse(0, int(self.steps[command_buffer[1]]))
-                    command_buffer = ["south"]
+                    command_buffer = ["南"]
                 else:
                     return self.handle_invalid_command(
                         command_buffer[1], command_buffer
                     )
-        elif command_buffer[0] == "east" or command_buffer[0] == "is":
+        elif command_buffer[0] == "东":
             if len(command_buffer) >= 2:
                 if command_buffer[1] in self.steps:
                     moveMouse(int(self.steps[command_buffer[1]]), 0)
-                    command_buffer = ["east"]
+                    command_buffer = ["东"]
                 else:
                     return self.handle_invalid_command(
                         command_buffer[1], command_buffer
                     )
-        elif command_buffer[0] == "west":
+        elif command_buffer[0] == "西":
             if len(command_buffer) >= 2:
                 if command_buffer[1] in self.steps:
                     moveMouse(-1 * int(self.steps[command_buffer[1]]), 0)
-                    command_buffer = ["west"]
+                    command_buffer = ["西"]
                 else:
                     return self.handle_invalid_command(
                         command_buffer[1], command_buffer
                     )
-        elif command_buffer[0] == "scroll" or command_buffer[0] == "surf":
+        elif command_buffer[0] == "滚动":
             if len(command_buffer) >= 2:
-                if command_buffer[1] in ["up", "down", "left", "right"]:
+                if command_buffer[1] in ["上", "下", "左", "右"]:
                     if len(command_buffer) >= 3:
                         if command_buffer[2] in self.steps:
-                            if command_buffer[1] == "up":
+                            if command_buffer[1] == "上":
                                 scrollUp(int(self.steps[command_buffer[2]]))
-                                command_buffer = ["scroll", "up"]
-                            if command_buffer[1] == "down":
+                                command_buffer = ["滚动", "上"]
+                            if command_buffer[1] == "下":
                                 scrollUp(-1 * int(self.steps[command_buffer[2]]))
-                                command_buffer = ["scroll", "down"]
-                            if command_buffer[1] == "left":
+                                command_buffer = ["滚动", "下"]
+                            if command_buffer[1] == "左":
                                 scrollRight(-1 * int(self.steps[command_buffer[2]]))
-                                command_buffer = ["scroll", "left"]
-                            if command_buffer[1] == "right":
+                                command_buffer = ["滚动", "左"]
+                            if command_buffer[1] == "右":
                                 scrollRight(int(self.steps[command_buffer[2]]))
-                                command_buffer = ["scroll", "right"]
+                                command_buffer = ["滚动", "右"]
                         else:
                             return self.handle_invalid_command(
                                 command_buffer[2], command_buffer
@@ -515,7 +515,7 @@ class CommandParser:
                     return self.handle_invalid_command(
                         command_buffer[1], command_buffer
                     )
-        elif command_buffer[0] == "grid":
+        elif command_buffer[0] == "网格":
             if len(command_buffer) >= 2:
                 if command_buffer[1] in self.grid_horizontal:
                     if len(command_buffer) >= 3:
@@ -539,7 +539,7 @@ class CommandParser:
                                 ypoint = ypoint + 20
 
                             moveMouseAbs(xpoint, ypoint)
-                            command_buffer = ["grid"]
+                            command_buffer = ["网格"]
                         else:
                             return self.handle_invalid_command(
                                 command_buffer[2], command_buffer

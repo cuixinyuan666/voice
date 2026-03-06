@@ -23,95 +23,93 @@ class AlphaParser:
     def __init__(self, system):
         self.os = system
         self.numbers = [
-            "zero",
-            "one",
-            "two",
-            "three",
-            "four",
-            "five",
-            "six",
-            "seven",
-            "eight",
-            "nine",
+            "零",
+            "一",
+            "二",
+            "三",
+            "四",
+            "五",
+            "六",
+            "七",
+            "八",
+            "九",
         ]
         self.punctuation = [
-            "ren",
-            "len",
-            "rack",
-            "equals",
-            "lack",
-            "period",
-            "colon",
-            "dash",
-            "comma",
-            "underscore",
-            "question",
-            "dot",
-            "hash",
-            "semicolon",
-            "bang",
-            "cap",
-            "exclamation",
-            "quote",
-            "single",
+            "右括号",
+            "左括号",
+            "右方括号",
+            "等于",
+            "左方括号",
+            "句号",
+            "冒号",
+            "破折号",
+            "逗号",
+            "下划线",
+            "问号",
+            "点",
+            "井号",
+            "分号",
+            "感叹号",
+            "大写",
+            "感叹号",
+            "引号",
+            "单引号",
         ]
         self.keywords = list(string.ascii_lowercase) + self.punctuation + self.numbers
 
     def word_to_int(self, word):
         mapping = {
-            "zero": "0",
-            "one": "1",
-            "two": "2",
-            "three": "3",
-            "four": "4",
-            "five": "5",
-            "six": "6",
-            "seven": "7",
-            "eight": "8",
-            "nine": "9",
+            "零": "0",
+            "一": "1",
+            "二": "2",
+            "三": "3",
+            "四": "4",
+            "五": "5",
+            "六": "6",
+            "七": "7",
+            "八": "8",
+            "九": "9",
         }
         return mapping[word]
 
     def insert_punctuation(self, text):
-        if text == "period":
-            text = text.replace("period", ".")
-        elif text == "equals":
-            text = text.replace("equals", "=")
-        elif text == "ren":
-            text = text.replace("ren", ")")
-        elif text == "len":
-            text = text.replace("len", "(")
-        elif text == "lack":
-            text = text.replace("lack", "[")
-        elif text == "rack":
-            text = text.replace("rack", "]")
-        elif text == "colon":
-            text = text.replace("colon", ":")
-        elif text == "dash":
-            text = text.replace("dash", "-")
-        elif text == "comma":
-            text = text.replace("comma", ",")
-        elif text == "question":
-            text = text.replace("question", "?")
-        elif text == "dot":
-            text = text.replace("dot", ".")
-        elif text == "quote":
-            text = text.replace("quote", '"')
-        elif text == "hash":
-            text = text.replace("hash", "#")
-        elif text == "single":
-            text = text.replace("single", "'")
-        elif text == "underscore":
-            text = text.replace("underscore", "_")
-        elif text == "semicolon":
-            text = text.replace("semicolon", ";")
-        elif text == "bang" or text == "exclamation":
-            text = text.replace("bang", "!").replace("exclamation", "!")
+        if text == "句号" or text == "点":
+            text = text.replace("句号", ".").replace("点", ".")
+        elif text == "等于":
+            text = text.replace("等于", "=")
+        elif text == "右括号":
+            text = text.replace("右括号", ")")
+        elif text == "左括号":
+            text = text.replace("左括号", "(")
+        elif text == "左方括号":
+            text = text.replace("左方括号", "[")
+        elif text == "右方括号":
+            text = text.replace("右方括号", "]")
+        elif text == "冒号":
+            text = text.replace("冒号", ":")
+        elif text == "破折号":
+            text = text.replace("破折号", "-")
+        elif text == "逗号":
+            text = text.replace("逗号", ",")
+        elif text == "问号":
+            text = text.replace("问号", "?")
+        elif text == "引号":
+            text = text.replace("引号", '"')
+        elif text == "井号":
+            text = text.replace("井号", "#")
+        elif text == "单引号":
+            text = text.replace("单引号", "'")
+        elif text == "下划线":
+            text = text.replace("下划线", "_")
+        elif text == "分号":
+            text = text.replace("分号", ";")
+        elif text == "感叹号":
+            text = text.replace("感叹号", "!")
 
         return text
 
     def evaluate_text(self, command_buffer):
-        if command_buffer[0] == "cap":  # capitalize next word spoken
+        if command_buffer[0] == "大写":  # capitalize next word spoken
             if len(command_buffer) >= 2:
                 writeToScreen(command_buffer[1].capitalize())
                 if len(command_buffer) > 2:

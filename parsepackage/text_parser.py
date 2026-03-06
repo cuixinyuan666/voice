@@ -26,13 +26,13 @@ class TextParser:
         self.tocap = ["i"]
 
     def evaluate_text(self, command_buffer):
-        if command_buffer[0] == "underscore":
+        if command_buffer[0] == "下划线":
             self.space = "_"
             command_buffer = []
-        elif command_buffer[0] == "pack":
+        elif command_buffer[0] == "紧凑":
             self.space = ""
             command_buffer = []
-        elif command_buffer[0] == "cap":  # capitalize next word spoken
+        elif command_buffer[0] == "大写":  # capitalize next word spoken
             if len(command_buffer) >= 2:
                 writeToScreen(self.space + command_buffer[1].capitalize())
                 if len(command_buffer) > 2:

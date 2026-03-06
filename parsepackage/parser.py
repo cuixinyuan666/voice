@@ -26,29 +26,23 @@ from .alpha_parser import AlphaParser
 class Parser:
     def __init__(self):
         self.os = platform.system()
-        self.state = "command"
+        self.state = "命令"
         self.command_buffer = []
         self.pause = False
 
         self.stepmapping = {
-            "one": 10,
-            "an": 10,
-            "on": 10,
-            "two": 30,
-            "to": 30,
-            "too": 30,
-            "three": 50,
-            "four": 100,
-            "for": 100,
-            "five": 300,
-            "six": 500,
-            "seven": 1000,
-            "eight": 1500,
-            "at": 1500,
+            "一": 10,
+            "二": 30,
+            "三": 50,
+            "四": 100,
+            "五": 300,
+            "六": 500,
+            "七": 1000,
+            "八": 1500,
         }
 
-        self.states = ["text", "command", "mouse", "pause", "alpha"]
-        self.steps = ["one", "two", "three", "four", "five", "six", "seven", "eight"]
+        self.states = ["文本", "命令", "鼠标", "暂停", "字母"]
+        self.steps = ["一", "二", "三", "四", "五", "六", "七", "八"]
 
         self.mouseParser = MouseParser(self.os, self.stepmapping)
         self.textParser = TextParser(self.os, self.stepmapping)
@@ -88,36 +82,34 @@ class Parser:
 
         if self.pause:
 
-            if self.command_buffer[0] == "time":
+            if self.command_buffer[0] == "开始":
                 if len(self.command_buffer) >= 2:
-                    if self.command_buffer[1] == "to":
-                        if len(self.command_buffer) >= 3:
-                            if self.command_buffer[2] == "work":
-                                self.state = "command"
-                                self.pause = False
-                                self.command_buffer = []
-                                print("Sidekick is back in action")
+                    if self.command_buffer[1] == "工作":
+                        self.state = "命令"
+                        self.pause = False
+                        self.command_buffer = []
+                        print("Sidekick 重新开始工作")
             else:
                 self.command_buffer = []
 
         else:
             # either set state or parse command
-            if self.command_buffer[-1] == "pause":
+            if self.command_buffer[-1] == "暂停":
                 self.pause = True
-                self.state = "text"  # this ensures 'pause' is not accidentally triggered by model with smaller search space
-                print("Sidekick is taking a rest")
+                self.state = "文本"  # this ensures 'pause' is not accidentally triggered by model with smaller search space
+                print("Sidekick 正在休息")
                 self.command_buffer = []
-            elif self.command_buffer[-1] == "command":
-                self.state = "command"
+            elif self.command_buffer[-1] == "命令":
+                self.state = "命令"
                 self.command_buffer = []
-            elif self.command_buffer[-1] == "text":
-                self.state = "text"
+            elif self.command_buffer[-1] == "文本":
+                self.state = "文本"
                 self.command_buffer = []
-            elif self.command_buffer[-1] == "alpha":
-                self.state = "alpha"
+            elif self.command_buffer[-1] == "字母":
+                self.state = "字母"
                 self.command_buffer = []
-            elif self.command_buffer[-1] == "mouse":
-                self.state = "mouse"
+            elif self.command_buffer[-1] == "鼠标":
+                self.state = "鼠标"
                 self.command_buffer = []
                 self.command_buffer, self.state = self.mouseParser.evaluate_mouse(
                     self.command_buffer
@@ -129,24 +121,24 @@ class Parser:
                         self.command_buffer,
                     ) = self.commandParser.stateless_command(self.command_buffer)
                     if not stateless:
-                        if self.state == "command":
+                        if self.state == "命令":
                             self.command_buffer = self.commandParser.evaluate_command(
                                 self.command_buffer
                             )
-                        elif self.state == "text":
+                        elif self.state == "文本":
                             self.command_buffer = self.textParser.evaluate_text(
                                 self.command_buffer
                             )
-                        elif self.state == "alpha":
+                        elif self.state == "字母":
                             self.command_buffer = self.alphaParser.evaluate_text(
                                 self.command_buffer
                             )
-                        elif self.state == "mouse":
+                        elif self.state == "鼠标":
                             (
                                 self.command_buffer,
                                 self.state,
                             ) = self.mouseParser.evaluate_mouse(self.command_buffer)
             
         # stop mouse if state is switched before stopping
-        if not self.mouseParser.stopMouse and self.state != "mouse":
+        if not self.mouseParser.stopMouse and self.state != "鼠标":
             self.mouseParser.stopMouse = True
